@@ -1,0 +1,3 @@
+/home/trial/Master/BIG_DATA_TECHNOLOGIES-CONF.DR.M.FRINCU/OpenMP/build/CMakeFiles/rebuild_cache.dir
+/home/trial/Master/BIG_DATA_TECHNOLOGIES-CONF.DR.M.FRINCU/OpenMP/build/CMakeFiles/PI.dir
+/home/trial/Master/BIG_DATA_TECHNOLOGIES-CONF.DR.M.FRINCU/OpenMP/build/CMakeFiles/edit_cache.dir

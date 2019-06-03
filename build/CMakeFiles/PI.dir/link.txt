@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -Wextra    CMakeFiles/PI.dir/main.cpp.o CMakeFiles/PI.dir/run.cpp.o CMakeFiles/PI.dir/utils.cpp.o  -o PI /usr/lib/libgomp.so /usr/lib/libpthread.so 
