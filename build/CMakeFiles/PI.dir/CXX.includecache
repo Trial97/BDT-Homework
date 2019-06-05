@@ -305,6 +305,8 @@ utils.hpp
 /home/trial/Master/BIG_DATA_TECHNOLOGIES-CONF.DR.M.FRINCU/OpenMP/run.cpp
 run.hpp
 /home/trial/Master/BIG_DATA_TECHNOLOGIES-CONF.DR.M.FRINCU/OpenMP/run.hpp
+omp.h
+-
 utils.hpp
 /home/trial/Master/BIG_DATA_TECHNOLOGIES-CONF.DR.M.FRINCU/OpenMP/utils.hpp
 
@@ -323,7 +325,13 @@ stdio.h
 -
 stdlib.h
 -
+string.h
+-
 chrono
+-
+cstdlib
+-
+iostream
 -
 random
 -

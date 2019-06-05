@@ -2,11 +2,20 @@
 #include "utils.hpp"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <chrono>
+#include <cstdlib>
+#include <iostream>
 #include <random>
 
 void exportVariable(std::string variable, std::string value) {
-  system(("export " + variable + "=" + value).c_str());
+  auto cmd = variable + "=" + value;
+  char* cmd1 = new char[cmd.length() + 1];
+  strcpy(cmd1, cmd.c_str());
+  cmd1[cmd.length()] = 0;
+  putenv(cmd1);
+  std::cout << getenv(variable.c_str()) << std::endl;
+  system(cmd1);
 }
 
 std::chrono::nanoseconds GetDuation(std::function<void()> func) {
@@ -35,11 +44,11 @@ class UniformDistribution {
   std::uniform_real_distribution<double> distribution;
 };
 
-double sequentialPI(const int numSamples) {
+double sequentialPI(const unsigned long long numSamples) {
   UniformDistribution distribution;
 
-  int counter = 0;
-  for (int s = 0; s != numSamples; s++) {
+  unsigned long long counter = 0;
+  for (unsigned long long s = 0; s != numSamples; s++) {
     auto x = distribution.sample();
     auto y = distribution.sample();
 
@@ -51,11 +60,11 @@ double sequentialPI(const int numSamples) {
   return 4.0 * counter / numSamples;
 }
 
-int samplesInsideCircle(const int numSamples) {
+unsigned long long samplesInsideCircle(const unsigned long long numSamples) {
   UniformDistribution distribution;
 
-  int counter = 0;
-  for (int s = 0; s != numSamples; s++) {
+  unsigned long long counter = 0;
+  for (unsigned long long s = 0; s != numSamples; s++) {
     auto x = distribution.sample();
     auto y = distribution.sample();
     ;
@@ -68,13 +77,14 @@ int samplesInsideCircle(const int numSamples) {
   return counter;
 }
 
-double parallelPI(int numTotalSamples, int numChunks) {
-  int chunk = numTotalSamples / numChunks;
+double parallelPI(unsigned long long numTotalSamples,
+                  unsigned long long numChunks) {
+  unsigned long long chunk = numTotalSamples / numChunks;
 
-  int counter = 0;
+  unsigned long long counter = 0;
 
 #pragma omp parallel for shared(numChunks, chunk) reduction(+ : counter)
-  for (int i = 0; i < numChunks; i++) {
+  for (unsigned long long i = 0; i < numChunks; i++) {
     counter += samplesInsideCircle(chunk);  // maybee change to
   }
 

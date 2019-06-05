@@ -1,8 +1,9 @@
 
 #include "run.hpp"
+#include <omp.h>
 #include "utils.hpp"
 
-run::run(int numSamples, int numProcesors, bool isParallel) {
+run::run(unsigned long long numSamples, int numProcesors, bool isParallel) {
   this->numSamples = numSamples;
   this->numProcesors = numProcesors;
   this->isParallel = isParallel;
@@ -31,6 +32,7 @@ run::~run() {
 }
 
 void run::prepare() {
+  omp_set_num_threads(this->numProcesors);
   // exportVariable(NUM_PROCESORS, std::to_string(this->numProcesors));
   if (this->problem == "DNA") {
     this->DNA = generateDNA(this->numSamples);

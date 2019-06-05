@@ -7,7 +7,7 @@ using json = nlohmann::json;
 
 class run {
  private:
-  int numSamples = 10000;
+  unsigned long long numSamples = 10000;
   int numProcesors = 1;
   bool isParallel;
   double PI;
@@ -23,7 +23,7 @@ class run {
   void parallelDna(void);
 
  public:
-  run(int numSamples, int numProcesors, bool isParallel);
+  run(unsigned long long numSamples, int numProcesors, bool isParallel);
   run(json config);
   ~run();
   run* execute();
