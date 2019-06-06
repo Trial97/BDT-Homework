@@ -1,35 +1,23 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.6)
 
-set (CMAKE_CXX_STANDARD 17)
+set (CMAKE_CXX_STANDARD 11)
 
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra ")
 
 project(PI VERSION 0.1.0)
 
-add_executable(PI)
-
-function(target_sources_local target)
-    cmake_policy(PUSH)
-    cmake_policy(SET CMP0076 NEW)
-    target_sources(${target} ${ARGN})
-    cmake_policy(POP)
-    return()
-endfunction()
+add_executable(PI  main.cpp
+                run.cpp
+                run.hpp
+                utils.cpp
+                utils.hpp)
 
 find_package(OpenMP)
-if(OpenMP_CXX_FOUND)
-    target_link_libraries(PI PUBLIC OpenMP::OpenMP_CXX)
+if (OPENMP_FOUND)
+    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+    set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 endif()
 
 # target_include_directories(${PROJECT_NAME} PUBLIC dep)
-target_compile_options(${PROJECT_NAME} PUBLIC  -Wl,--gc-sections -Wl,--strip-all  )
-target_sources(PI 
-	PUBLIC
-		main.cpp
-		run.cpp
-		run.hpp
-		utils.cpp
-		utils.hpp
-		)
-
-
+target_compile_options(${PROJECT_NAME} PUBLIC  -Wl,--gc-sections -Wl,--strip-all)
