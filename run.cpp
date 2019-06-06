@@ -66,12 +66,12 @@ std::string run::toString() {
   if (this->problem == "PI") {
     out["PI"] = this->PI;
   } else if (this->problem == "DNA") {
-    auto dna = std::string(this->DNA);
-    out["DNA"] = dna;
-    if (this->TDNA != nullptr) {
-      auto tdna = std::string(this->TDNA);
-      out["TDNA"] = tdna;
-    }
+    // auto dna = std::string(this->DNA);
+    // out["DNA"] = dna;
+    // if (this->TDNA != nullptr) {
+    //   auto tdna = std::string(this->TDNA);
+    //   out["TDNA"] = tdna;
+    // }
   }
   return out.dump();
 }
