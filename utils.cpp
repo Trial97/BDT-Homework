@@ -1,22 +1,8 @@
 
 #include "utils.hpp"
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <chrono>
-#include <cstdlib>
-#include <iostream>
 #include <random>
-
-void exportVariable(std::string variable, std::string value) {
-  auto cmd = variable + "=" + value;
-  char* cmd1 = new char[cmd.length() + 1];
-  strcpy(cmd1, cmd.c_str());
-  cmd1[cmd.length()] = 0;
-  putenv(cmd1);
-  std::cout << getenv(variable.c_str()) << std::endl;
-  system(cmd1);
-}
 
 std::chrono::nanoseconds GetDuation(std::function<void()> func) {
   auto start = std::chrono::steady_clock::now();
@@ -105,31 +91,31 @@ char complement(char n) {
   return ' ';
 }
 
-char* sequentialDNA(int n, char* dna) {
+char* sequentialDNA(unsigned long long n, char* dna) {
   char* cdna = new char[n + 1];
-  for (int i = 0; i < n; i++) {
+  for (unsigned long long i = 0; i < n; i++) {
     cdna[i] = complement(dna[i]);
   }
   cdna[n] = 0;
   return cdna;
 }
 
-char* parallelDNA(int n, char* dna) {
+char* parallelDNA(unsigned long long n, char* dna) {
   char* cdna = new char[n + 1];
 #pragma omp parallel for shared(n, dna, cdna)  // reduction(+ : counter)
-  for (int i = 0; i < n; i++) {
+  for (unsigned long long i = 0; i < n; i++) {
     cdna[i] = complement(dna[i]);
   }
   cdna[n] = 0;
   return cdna;
 }
 
-char* generateDNA(int n) {
+char* generateDNA(unsigned long long n) {
   char* pDNA = new char[4]{'A', 'T', 'G', 'C'};
   char* dna = new char[n + 1];
   UniformDistribution distribution;
-  for (int i = 0; i < n; i++) {
-    int d = int(3 * (distribution.sample() + 1) / 2);
+  for (unsigned long long i = 0; i < n; i++) {
+    unsigned long long d = (3 * (distribution.sample() + 1) / 2);
     dna[i] = pDNA[d];
   }
   dna[n] = 0;

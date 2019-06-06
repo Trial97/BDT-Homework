@@ -33,7 +33,6 @@ run::~run() {
 
 void run::prepare() {
   omp_set_num_threads(this->numProcesors);
-  // exportVariable(NUM_PROCESORS, std::to_string(this->numProcesors));
   if (this->problem == "DNA") {
     this->DNA = generateDNA(this->numSamples);
   }

@@ -15,8 +15,8 @@ double sequentialPI(const unsigned long long numSamples);
 double parallelPI(const unsigned long long numTotalSamples,
                   const unsigned long long numChunks = 8);
 
-char* sequentialDNA(int n, char* dna);
+char* sequentialDNA(unsigned long long n, char* dna);
 
-char* parallelDNA(int n, char* dna);
+char* parallelDNA(unsigned long long n, char* dna);
 
-char* generateDNA(int n);
+char* generateDNA(unsigned long long n);
