@@ -48,9 +48,9 @@ run* run::execute() {
     }
   } else if (this->problem == "DNA") {
     if (this->isParallel) {
-      this->duration = GetDuation([&]() { this->sequentialDna(); });
-    } else {
       this->duration = GetDuation([&]() { this->parallelDna(); });
+    } else {
+      this->duration = GetDuation([&]() { this->sequentialDna(); });
     }
   }
   return this;
